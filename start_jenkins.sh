@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-export JENKINS_HOME=/opt/jenkins_home
+export JENKINS_HOME=/opt/jenkins/home
 
-if [[ ! -f jenkins.war ]]; then
-    wget "http://mirrors.jenkins-ci.org/war/latest/jenkins.war"
+WAR_PATH=/opt/jenkins/jenkins.war
+
+if [[ ! -f $WAR_PATH ]]; then
+    wget "http://mirrors.jenkins-ci.org/war/latest/jenkins.war" -O $WAR_PATH
 fi
 
-java -jar jenkins.war --httpPort=$PORT --ajp13Port=-1 --httpsPort=-1
+java -jar $WAR_PATH --httpPort=$PORT --ajp13Port=-1 --httpsPort=-1
